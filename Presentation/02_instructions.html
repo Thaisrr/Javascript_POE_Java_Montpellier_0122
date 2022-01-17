@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Les instructions</title>
+</head>
+<body>
+
+<script>
+
+    /* Les conditions
+    * if, else if, else
+    * ( conditions ) ( sauf pour else )
+    * { } block d'instructions
+    *
+    * On peut n'utiliser que :
+    *   - un if tout seul
+    *   - un if et 1 ou plus else if
+    *   - un if et un else
+    *   - un if, 1 ou + else if un else
+    *  */
+
+    if( 10 > 20) {
+        // block d'instructions
+    } else if (20 > 20) {
+        // instructions
+    } else {
+        // instructions
+    }
+
+    /*
+    Les Switchs :
+    Pour tester plusieurs possibilité sur une même variable
+     */
+
+    const day = "LUNDI";
+
+    switch (day) {
+        case "LUNDI": // Test de la valeur
+            console.log("Oh no !"); // instruction
+            break; // Arrêt
+        case  "MERCREDI" || "JEUDI": // On peut utiliser les || et les &&
+            console.log("Milieu de la semaine");
+            break;
+        case "SAMEDI":
+            console.log("Week End !"); // Pas de break : on execute aussi le block suivant
+        case "DIMANCHE" :
+            console.log("Netflix and chills");
+            break;
+        default:
+            console.log("Meh");
+    }
+
+    /*
+    Expressions ternaires :
+    -> Retourner une valeur en fonction d'une condition simple
+    -> En une ligne
+    -> Pour assigner / retourner
+    -> Utilisé si il y 2 possibilités, pas plus
+     */
+
+    const mood = (day === 'VENDREDI' || day === 'SAMEDI' || day === 'DIMANCHE')?
+        'Yeah !' : 'Meh !';
+
+
+    let a;
+
+    const bool = a; // undefined
+
+    if(a) {
+        // si a est truthy ( pas falsy : undefined)
+    }
+
+// Assigner une valeur si la variable est falsy
+    // avan
+    if(!a) {
+        a = 'coucou';
+    }
+
+    // Ecmasript 2021
+    a ||= 'coucou';
+
+
+// Assigner si une valeur est truthy
+    // Avant
+    if(a) {
+        a = 'Nope';
+    }
+    // Ecmascript 2021
+    a &&= 'Nope';
+
+    /*
+    Les boucles :
+     */
+
+    // ++i => i s'incrémente avant les instructions
+    // i++ => i s'incrémente après les instructions
+    for (let i = 0; i <= 10; i++) {
+        console.log(`Hello ${i} fois`);
+    }
+
+
+
+</script>
+
+</body>
+</html>

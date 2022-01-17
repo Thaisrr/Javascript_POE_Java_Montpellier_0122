@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Les Fonctions</title>
+</head>
+<body>
+
+<script>
+    /*
+    Fonction : block d'instructions réutilisable
+    -> Optimiser le code,
+    -> Eviter les redondances de code
+    -> Rendre le code plus lisible, grâce à des noms de fonction parlant
+
+    -> Nom de fonction en snake_case ou camelCase
+    -> 1ere lettre en minuscule
+    -> Pas de chiffre ou de caractère spécial en début
+
+    function : pour déclarer une fonction ( classique )
+     */
+
+    function sayHello() {
+        console.log("Hello !");
+    }
+
+    function sum(a, b) {
+        // faire des trucs
+        return a + b;
+        // le retour marque la fin de la fonction
+        console.log("warning : unreachable code");
+    }
+
+    sayHello();
+    sum(329, 123); // ne sert à rien
+    const result = sum(329, 123);
+    console.log(result);
+
+    /*
+    On ne peut pas surcharger les fonctions en JS
+     */
+
+
+    // Autre syntaxe pour un résultat identique : Fonction anonyme
+    const soustraction = function (a, b) {
+        return a - b;
+    }
+    soustraction(78, 65);
+
+    // Fonctions fléchées :
+
+    const multiply = (a, b) => a * b; // return a * b
+    /*
+    Intéret :
+        -> écrire une fonction simple, à 1 seule instruction, sur une seule ligne
+        -> Sur une seule ligne, sans accolades, le retour est implicite
+
+   Attention : le contexte ( this ) change avec les fonctions fléchées ( cf cours objets )
+     */
+
+    const diviser = (a, b) => {
+        // do stuff
+        // Dès qu'il y a des accolades ( obligatoires sur plusieurs lignes )
+        // il faut remettre le mot clef return pour retourner une valeur
+        return a / b;
+    }
+
+
+
+</script>
+
+</body>
+</html>

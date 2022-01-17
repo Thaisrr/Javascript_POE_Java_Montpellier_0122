@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Présentation</title>
+</head>
+<body>
+
+<h1>Présentation de Javascript</h1>
+
+<p>Pour rédiger du Javascript 2 possibilités : dans un fichier .js, soit dans
+le HTML, dans des balises de script</p>
+
+
+
+<!-- Les balises de script se mettent en bas du code,
+ avant la balise fermante de body-->
+<script>
+    /*
+      Ici : du Javascript
+      un commentaire sur plusieurs lignes
+     */
+
+    /**
+     * Pour de la documentation
+     */
+
+    // Un commentaire sur une seule ligne
+
+    /* Les Variables :
+    Nom :
+        - doit commencer par une minuscule
+        - camelCase ou snake_case ( pas de kebab-case )
+        - ( user_birthdate ou user_bdate ou userBirthDate ... )
+        - anglais ( ou en français mais sans caractères spéciaux, accents... )
+     */
+
+    // var : à ne plus utiliser
+    var hello = "Hello World"; // problème de porté des variables
+
+    let name = "Thaïs"; // variable modifiable
+    const message = "Bonjour "; // constante : ne peut pas être réassignée
+    // Assigner une variable c'est lui donner une valeur avec "="
+    //message = "interdit";
+
+    /*
+    On conseille de privilégier les constantes pour sécuriser le code
+    ( notamment pour éviter de modifier le type de la variable )
+    et à optimiser la mémoire
+     */
+
+    let a = "un chaîne entre \"guillemets\". " + "C'est pratique pour les apostrophes.  ";
+    let b = 'Une chaîne entre "simple quotes" :' +
+        ' C\'est relou pour les apostrophes.';
+    let c = `Un string entre "quotes inversées" ( alt gr + 7 )''''''`;
+
+    // Concaténation :
+    let d = "Bonjour " + name;
+    let e = 'Bonjour ' + name;
+    let f = `Bonjour ${name}.
+        A l'intérieur des accolades, on peut interpréter du JS :
+        1 + 2 = ${1 + 2}
+    `;
+
+    // Afficher des logs :
+    console.log('log', f);
+    console.info('info', f);
+    console.warn('warn', f); // warning
+    console.error('error', f);
+
+
+    /*
+    Number : int, float, double, long...
+     */
+    let na; // variable non assignée : undefined
+    na = null; // pas utilisé, à éviter
+    na = undefined;
+    na = 'un string';
+
+    na = 10;
+    na = 13.55;
+    na = 2 + 3; // 5
+    na = -3;
+
+    const nb = '1';
+    const nc = 2;
+    let nd = nb + nc; // 12 -> nb est une string, donc JS concatène.
+    console.log(`'1' + 2 = ` + nd);
+    nd = nc + nb;
+    console.log(`2 + '1' = `  + nd); // 21
+
+    nd = nb - nc; // '1' - 2 =>
+    console.log(`'1' - 2 = ` + nd);
+    /* Quand c'est possible, les string sont automatiquement castée en number
+    pour les calculs
+
+     */
+    const ne = "coucou";
+    nd = ne - nc; // "coucou" - 2
+    console.log(`"coucou" - 2 = ${nd}`);
+    /*
+    Pas d'erreur mais une valeur NaN
+    => Not a Number
+    Quand on demande de faire une opération mais que JS n'a pas pu caster en number
+     */
+    nd = NaN;
+
+    // Incrémentation
+    let ng = 1;
+    ng = ng + 1;
+    ng++;  // Utilise la valeur avant d'ajouter 1
+    ++ng; // Ajouter 1 avant d'utiliser la valeur
+    ng = 1;
+
+    console.log(ng++); // 1   => affiche 1 puis fait 1 + 1, retourne 2
+    console.log(++ng); // 3  => 2 + 1 puis on l'affiche
+
+    // Décrémentation
+    ng--;
+    --ng;
+
+    ng = ng + 2;
+    ng += 2; // ng + 2 => 4
+    ng -= 2; // ng - 2 => 2
+    ng *= 2; // ng * 2 => 4
+    ng /= 2; // ng / 2 => 2
+    ng %= 2; // ng % 2 => 0
+
+
+    // Les booléans :
+
+    /*
+    2 valeurs possibles : true ou false
+    -> résultat d'une condition
+
+    Opérateurs de conditions :
+    === : égalité
+    !== : différence
+    > < : plus grand que / plus petit que
+    >= <= : plus grand ou égale / plus petit ou égale
+     */
+
+    const bool_a = true;
+    const bool_b = false;
+
+    let z;
+
+    let bool_c = 30 < 10; // false
+    bool_c = nc >= nd;
+    console.log(bool_c);
+
+    bool_c = a === b;
+    bool_c = d !== c;
+    console.log(bool_c);
+
+    // pas d'erreur, z à une valeur "undefined"
+    bool_c = z !== c; // true -> z est undefined, c n'est pas undefined
+
+    bool_c = !z; // true si z est undefined ou null
+    console.log(`z n'existe pas : ` + bool_c);
+
+    // undefined ou null => falsy
+    /*
+    false => faux
+    falsy => états undefined, null, 0, 0.0, NaN
+    -> Si la valeur testée est falsy => !valeur retourne true
+    sinon ( valeur est définie, si c'est un number est différente de 0 => retourne false
+     */
+
+    const bool_d = true;
+    bool_c = !bool_d; // sur un boolean, ! retourne l'inverse => false
+    const bool_e = false;
+    bool_c = !bool_e; // true
+
+    const bool_f = 0; // 0, undefined, null, NaN, 0.0, ""
+    bool_c = !bool_f; // true
+    console.log(bool_c);
+
+    const bool_g = 5; // number > ou < à 0, string non vide, objet, tableau ....
+    bool_c = !bool_g; // false
+
+    /*
+    Cumuler les conditions :
+    && => les 2 conditions doivent être vrai pour retourner true
+    || => l'une ou l'autre des conditions doit être vrai pour retourner true
+     */
+
+    const age_user = 50;
+    const is_old_enought = (age_user >= 13) && (age_user <= 110);
+    // true si age_user est compris entre 13 et 110
+
+    const bool = true;
+    const error_login = (age_user < 13 || age_user > 110) && bool;
+
+    let toto;
+    const exist = toto !== undefined;
+    const is_falsy = !toto;
+
+
+
+
+
+
+
+
+</script>
+
+<!-- Pour importer un fichier externe
+-> Soit en bas du code
+-> Soit dans le head du HTML
+-->
+<!--
+<script src="hello.js"></script>
+-->
+
+</body>
+</html>
