@@ -9,6 +9,8 @@
 <script>
     let previous;
     let rand;
+    let nb_tours = 0;
+    let min_tour;
 
     const startGame = () => {
         // message de présentation du jeu
@@ -22,6 +24,8 @@
         } while (!is_winner);
         if(confirm(`Voulez vous recommencer ?`)) {
             startGame();
+            previous = undefined;
+            nb_tours = 0;
         }
     }
 
@@ -65,9 +69,26 @@
                 message += ' Mais vous tournez autour !'
             }
         }
-        previous = (winner)? undefined :  input;
+
+        nb_tours++;
+        setMinTour();
+        message += (winner)?
+            `Meilleur score : ${min_tour} tours` :
+            ` ( tour numéro : ${nb_tours})`;
+        previous = input;
         alert(message);
+
         return winner;
+    }
+
+
+    const setMinTour = () => {
+        if(!min_tour) { // premier jeu
+            min_tour = nb_tours;
+        } else if(min_tour > nb_tours) {
+            // On a déjà joué, donc on modifie si besoin le meilleur score
+            min_tour = nb_tours;
+        }
     }
 
     startGame();
