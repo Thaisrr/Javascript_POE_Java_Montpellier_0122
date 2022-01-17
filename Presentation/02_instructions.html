@@ -99,6 +99,34 @@
         console.log(`Hello ${i} fois`);
     }
 
+    let j = 0;
+    while (j < 10) { // Si la condition n'est pas vrai, on entre pas
+        // do something
+        ++j;
+    }
+
+    // Utilisable avec des conditions qui ne sont pas numérique
+
+    // On entre au moins 1 fois dans l'instruction
+    do {
+        // do something
+        --j;
+    } while (j > 0);
+
+
+    // Fenêtres de dialogue
+
+    const input = confirm('Voulez vous continuer ?'); // return un boolean
+    // 2 bouton : OK ( return true ), Annuler ( return false )
+
+    while (confirm('Voulez vous continuer ?')) {
+        alert("On continue"); // pour afficher un message
+    }
+
+    const answer = prompt("ça va ?"); // récupère une string
+    // return null si pas de réponse
+
+    alert("Vous avez répondu : " + answer);
 
 
 </script>

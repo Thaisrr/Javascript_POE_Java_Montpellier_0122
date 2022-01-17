@@ -50,6 +50,8 @@
     // Fonctions fléchées :
 
     const multiply = (a, b) => a * b; // return a * b
+  const result2 =  multiply(24, 28);
+
     /*
     Intéret :
         -> écrire une fonction simple, à 1 seule instruction, sur une seule ligne
@@ -62,10 +64,77 @@
         // do stuff
         // Dès qu'il y a des accolades ( obligatoires sur plusieurs lignes )
         // il faut remettre le mot clef return pour retourner une valeur
+        const div_result = a/b;
+        if(true) {
+            console.log(div_result); // OK
+            const toto = "toto";
+            var toto2 = "toto";
+        }
+        // toto non accessible
+        console.log(toto2); // toto2 accessible
         return a / b;
     }
 
+    console.log( diviser(34, 56));
 
+   // console.log(div_result); // erreur : Uncaught ReferenceError
+
+    /*
+    Les variables déclarées dans un block ( {} ) n'existe que dans ce block
+    -> les variables ont une portée de block
+     */
+
+    // Fonction auto invoquées
+
+    // Anonyme
+    (function () {
+        console.info("Fonction auto invoquée")
+    })();
+
+    (function bonjour() {
+        console.log("Bonjour auto invoqué")
+    })();
+
+    (function (a, b) {
+        console.log(`Sum ${a} + ${b} = ${a + b}`);
+    })(30, 50);
+
+    // bonjour() ne peut pas être appelée
+
+    /*
+    But : créer des variables protégées par la portée de block
+    -> éviter de colliser les variables
+    -> optimiser le code
+    -> surtout vrai pour du vieux JS
+     */
+
+    // Fonction récursive :
+
+    // fonction s'appelle elle même, pour faire une boucle par exemple
+
+    function decompte(i) {
+        if(i > 0) {
+            console.log(`Fonction récursive ${i}`);
+            decompte(--i);
+        }
+    }
+    decompte(7);
+
+    // Callback
+
+    // -> fonction passée en paramétre d'une autre fonction
+
+    function repeatSomething(n, doStuff) {
+        // Répéte une action un nombre 10 fois
+        for (let i = 0; i < n; i++) {
+            doStuff();
+        }
+    }
+
+    repeatSomething(5, () => console.log("Callback fléchée"));
+    repeatSomething(5, function () {
+        console.info("Callback anonyme")
+    });
 
 </script>
 
