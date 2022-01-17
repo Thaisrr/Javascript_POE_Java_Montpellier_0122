@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess Number</title>
+</head>
+<body>
+
+<script>
+    let previous;
+    let rand;
+
+    const startGame = () => {
+        // message de présentation du jeu
+        // initialiser le random
+        // Boucle pour recommencer
+        alert('Message de présentation du jeu');
+        rand =  Math.floor(Math.random() * 100) + 1;
+        let is_winner = false;
+        do {
+            is_winner = play();
+        } while (!is_winner);
+        if(confirm(`Voulez vous recommencer ?`)) {
+            startGame();
+        }
+    }
+
+    const play = () => {
+        let winner = false;
+        const input = prompt('Entrez un nombre entre 0 et 100');
+        // Vérifier la validité de l'input : number, entre 0 et 100
+        const numb = Number(input); // ou +input
+        if(isNaN(numb)) { // ( numb === NaN )
+            alert(`Vous n'avez pas entré un nombre !`);
+        } else if( numb < 0 || numb > 100) {
+            alert('Vous êtes hors sujet : le nombre a deviner est compris entre 0 et 100');
+        } else {
+            // Numb est OK -> on peut comparer
+            winner = getResults(numb);
+        }
+        return winner;
+    }
+
+    const getResults = (input) => {
+        let winner = false;
+        let message;
+        if(input === rand) {
+            message = 'Félicitations, vous avez gagné ';
+            winner = true;
+        } else if (input > rand) {
+            message = 'Raté, vous êtes trop haut !';
+        } else if( input < rand) {
+            message = 'Raté, vous êtes trop bas';
+        }
+        // Vérification par rapport à l'entrée précédente
+        if(!winner && previous) {
+            // rand - previous > rand - input -> on se rapproche
+            const diff_previous = Math.abs(rand - previous);
+            const diff_current = Math.abs(rand - input);
+            if(diff_current > diff_previous) {
+                message += ' Et vous vous éloignez :(';
+            } else if(diff_current < diff_previous) {
+                message += ' Mais vous vous rapprochez :)';
+            } else {
+                message += ' Mais vous tournez autour !'
+            }
+        }
+        previous = (winner)? undefined :  input;
+        alert(message);
+        return winner;
+    }
+
+    startGame();
+
+</script>
+
+</body>
+</html>
