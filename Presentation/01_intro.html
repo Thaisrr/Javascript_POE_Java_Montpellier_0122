@@ -202,7 +202,16 @@ le HTML, dans des balises de script</p>
     const is_falsy = !toto;
 
 
+    const a1 = 1;
+    const b1 = '1';
 
+    let bool1 = a1 === b1; // false
+    bool1 = a1 === +b1; // true
+    bool1 = a1 === Number(b1); // true
+
+    console.log(isNaN(b1)) // === NaN
+
+    console.log(bool1);
 
 
 
