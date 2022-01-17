@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Les tableaux</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    Tableaux / arrays / List => même chose
+    Une liste d'éléments de même type
+    Rangé dans un ordre donné ( en fonction de l'insertion )
+    Chaque item de la liste est associé à un index
+    Le premier item de la liste est associé à l'index 0
+
+    Objet Array
+     */
+
+   // const fruits = []; // Un tableau vide
+    const fruits = ['Clémentines', 'Pommes', 'Poires'];
+    console.log(fruits);
+    console.log(`Il y a ${fruits.length} items dans mon tableau`);
+    console.log(`Element à l'index 1 : ${ fruits[1] }`);
+    fruits[1] = 'Coings';
+
+    // ajoute à la fin du tableau et retourne la nouvelle taille
+    const new_length = fruits.push('Mangues');
+    console.log(`Il y a maintenant ${new_length} éléments dans mon tableau`);
+    fruits.push('Epinards');  // pas d'obligation de récupérer le retour
+
+    const deleted = fruits.pop(); // supprime le dernier élément du tableau et le retourne
+    console.log(`Les ${deleted} ont été supprimés du tableau`);
+
+    let index = fruits.indexOf('Mangues'); // si pas d'élément retourne -1
+    console.log(`Les mangues sont à l'index ${index}`);
+
+    if(index > -1) {
+        fruits.splice(index, 1); // index de l'élément à supprimer, nombre d'élément à supprimer
+    }
+    fruits.splice(0, 0, 'Patates', 'Tomates');
+    // splice peut prendre un nb variable d'arguments supplémentaire
+    // -> Ajouter les éléments dans le tableau
+    console.log(fruits);
+
+    const arr_deleted = fruits.splice(3); // Supprime tout à partir de l'index 3
+    console.log('Elements supprimés du tableau : ');
+    console.log(arr_deleted);
+
+    const restored = fruits.concat(arr_deleted);
+    console.log('Restored array : ', restored);
+
+    console.log('Il y a des fraises dans mon tableau : ', fruits.includes('Fraises'));
+
+    fruits.reverse(); // inverse les éléments d'un tableau
+    // Le 1er élément devient le dernier, le dernier le premier
+    console.log(fruits);
+
+    // La boucle For Of
+    console.warn('---- ForOf');
+    for (let f of fruits) {
+        f += ' for of'; // modification valable uniquement que dans le for
+        console.log(f); // Clémentine for of
+    }
+
+    console.warn('---- ForEach 1');
+    fruits.forEach( (item) => {
+        item += ' foreach';
+        console.log(item); // Clémentine foreach
+    });
+
+    fruits.forEach(function (item, i) {
+        // do stuff
+    });
+
+    console.warn('---- forEach 3')
+    function doStuff(item, index, array) {
+        // do stuff
+        // Array ; tableau sur lequel on itère
+      //  console.log(item, index)
+    }
+    /*
+    En 1er paramétre : element sur leque on itère
+    2eme param ( opt ) : index de l'élément sur lequel on itère
+    3eme param ( opt ) : le tableau entier
+     */
+
+    fruits.forEach(doStuff);
+
+    // Modifier chaque éléments du tableau :
+
+    for (let i = 0; i < fruits.length; i++) {
+        fruits[i] += ' modified';
+    }
+    fruits.forEach(el => console.log(el)); // modification apportées
+    /*
+    const modified_copy = fruits.map( (el) => {
+        el += ' again';
+        return el;
+    } )
+    */
+
+    const modified_copy = fruits.map( (el) => el + ' again');
+
+    modified_copy.forEach(el => console.log(el));
+
+
+    // retourne uniquement les mots de + de 4 lettres
+    const filtered_copy = fruits.filter(el => el.length > 4 );
+
+    const str = fruits.join(' - ');
+    // concaténer chaque éléments du tableau en une string, séparée par le param passé
+
+    console.log(str);
+
+
+    /* Les méthodes de string : */
+
+    const str = "  Hello World !  ";
+    let cleaned = str.trim(); // enlève les espaces avant et après la chaîne
+    cleaned = cleaned.toLowerCase();
+    cleaned = cleaned.toUpperCase();
+    let arr = str.split(''); // retourne un tableau lettre par lettre
+    arr = str.split(' '); // retourne un tableau lettre par mot pas mots
+
+    str.match('regex');// retourne un boolean
+
+
+</script>
+
+</body>
+</html>
