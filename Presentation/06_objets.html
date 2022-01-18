@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Les Objets</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    Classe : une définition ayant des attributs, des méthodes
+            // -> une description d'un concept ( réel ou non )
+            -> attributs / propriété qui vont décrire le concept
+            -> méthodes : fonctions propre à la classe ( static ) ou aux instances de la classe
+    Objet : une instance d'une classe
+     */
+
+    // La classe
+    class Chat {
+        nom;
+        couleur;
+        _race; // non bloquant, convention d'écriture
+        #age; // private attribute ( ES 2021 )
+        static nb_chats = 0;
+
+        constructor(nom, couleur, race) {
+            this.couleur = couleur;
+            this.nom = nom;
+            this._race = race;
+
+            Chat.nb_chats++;
+        }
+
+        miauler() {
+            console.log(`${this.nom} dit miaou`);
+        }
+
+        dominerLeMonde = function () {
+            console.log(`${this.nom} dominera le monde... mais pas maintenant, c'est l'heure de la sieste`);
+        }
+
+        demanderDesCroquettes = () => {
+            console.log(`${this.nom} veut des croquettes`)
+        }
+
+        static afficherNbChat() {
+            console.info('Nombre de chats : ', Chat.nb_chats);
+        }
+
+        // Ecmascript 2015 ( convention de nommage sans restriction réelle )
+        getRace() {
+            return this._race;
+        }
+
+        setRace(race) {
+            this._race = race;
+        }
+
+        // Ecmascript 2021
+        get age() {
+            return this.#age;
+        }
+
+        set age(age) {
+            this.#age = age;
+        }
+    }
+
+    class DomesticCat extends Chat {
+        // Récupère les attributs et méthode de chat
+        favorite_croquettes;
+
+        constructor(nom, race, couleur, favorite) {
+            super(nom, couleur, race);
+            this.favorite_croquettes = favorite;
+        }
+
+        //On peut redéfinir les méthodes du parent
+        demanderDesCroquettes = () => {
+            console.log(`${this.nom} veut vraiment des croquettes`)
+        }
+    }
+
+    // Les objets : les instances de la classe
+
+    console.log('Nombre de chats ', Chat.nb_chats);
+    Chat.afficherNbChat();
+
+    const cat1 = new Chat('Jean Michel', 'Noir et Blanc', 'Européen');
+    cat1.nom = 'Mistigri';
+    cat1.couleur = 'Blanc';
+
+    cat1.miauler();
+    cat1.dominerLeMonde();
+    cat1.demanderDesCroquettes();
+
+    const cat2 = new DomesticCat('Bidule', 'Roux', 'Angora', '...');
+    cat2.dominerLeMonde();
+    cat2.miauler();
+    cat2.demanderDesCroquettes();
+
+    console.log('Nombre de chats ', Chat.nb_chats);
+    console.log(cat2._race);
+    console.log(cat2.getRace());
+
+    // cat2.#age = 20;
+    cat2.age = 20;
+    console.log(cat2.age);
+
+    console.log('Type de cat2 : ', typeof cat2 );
+    console.log('Cat2 instance de DomesticCat : ',  cat2 instanceof DomesticCat); // true
+    console.log('Cat2 instance de Chat : ',  cat2 instanceof Chat); // true
+    console.log('Cat2 instance de Object : ',  cat2 instanceof Object); // true
+    // typeof variable => retourne une string
+    /*
+    typeof : retourne "object" pour les objets
+    -> On ne peut pas typer, ou vérifier le type d'une classe
+     */
+
+
+
+
+    /*
+    En JS il n'y a pas :
+    - de surcharge de méthode
+    - de notion d'abstraction
+    - d'interfaces
+    - d'enums
+
+    => existe en typescript ( sauf surcharge )
+     */
+
+
+</script>
+
+</body>
+</html>
