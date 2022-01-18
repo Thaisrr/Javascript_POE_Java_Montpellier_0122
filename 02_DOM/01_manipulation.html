@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulation du DOM</title>
+    <style>
+        h1 {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="color: black" id="titre">Hello DHTML ( Dynamic HTML )</h1>
+    <button onclick="changeColor()">Changer la couleur du titre</button>
+
+<script>
+    /* Document Objet Model  */
+
+    const h1 = document.getElementById('titre');
+    console.log(h1.style);
+
+    h1.style.fontSize = '5rem';
+    /*
+    Style : valeurs en String, et similaires à ce qu'attendrais le CSS
+
+    Noms des propriétés : en camelCase et non en kebab-case comme en CSS
+    font-size => fontSize
+    border-color => borderColor
+    border-top-left-radius => borderTopLeftRadius
+
+    JS ne lit que le style appliqué DANS les balises HTML.
+    Pas celui dans les balises <style>, ni celui des fichiers CSS.
+
+    => Pour le reste, les règles sont identiques
+     */
+
+    const changeColorBis = () => {
+        if(h1.style.color === 'black') {
+            h1.style.color = 'red';
+        } else {
+            h1.style.color = 'black'
+        }
+    }
+// Pour éviter le bug du 1er clic ou éviter le style dans le html
+    const changeColor = () => {
+        if(h1.style.color === 'red') {
+            h1.style.color = 'black';
+        } else {
+            h1.style.color = 'red'
+        }
+    }
+
+</script>
+
+</body>
+</html>
