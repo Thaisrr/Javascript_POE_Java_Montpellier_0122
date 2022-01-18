@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Moyennes</title>
+</head>
+<body>
+
+    <script>
+
+        const getCleanedNotes = (notes) => {
+            // Solution 1 : algo et boucles
+            /*
+            for(let i = 0; i < notes.length; i++) {
+                if(notes[i] < 0 || notes[i] > 20) {
+                    notes.splice(i, 1);
+                    i--;
+                }
+            }
+            */
+            //Solution 2 : méthodes d'Array JS
+           /* return notes.filter(function (n) {
+                return (n >= 0) && (n <= 20)
+            })
+            */
+            notes = notes.map(n => +n); // Number(n)
+            return notes.filter( n => (!isNaN(n)) && (n >= 0) && (n <= 20) )
+            .sort( (a, b) =>  a - b );
+        }
+
+        const getMoyenne = (notes) => {
+            // Somme des valeurs du tableau / longueur du tableau
+            let sum = 0;
+            notes.forEach(n => sum += n);
+
+            notes.reduce( (previous, current) => {
+                /*
+                 previous :
+                    a la 1ere itération : élément 0
+                    ensuite : ce qu'on à renvoyé à l'itération précédente
+                 current :
+                    à la 1ere itération : élément 1
+                    ensuite : éléments suivants, un par un jusqu'à la fin du tableau
+
+                 Retour de reduce : le retour de la dernière itération de la callback
+                 */
+                //console.log('previous : ' + previous);
+                //console.info('current : ' + current);
+                return previous + current;
+            });
+            sum = notes.reduce( (p, c) => p + c );
+            return sum / notes.length;
+        }
+
+        const getMediane = (notes) => {
+            /* -> valeur qui sépare dans une liste de nombre, la moitié inférieur de la moitié supérieur
+            [0, 5, 8] -> 5
+            [0, 5, 6, 9] -> 5,5
+            => trier le tableau dans un croissant ou décroissant
+             */
+            notes = getCleanedNotes(notes); // triées
+            console.log(notes);
+            if(notes.length % 2 === 0) { // pair 4
+                const index_max = notes.length / 2;
+                const index_min = index_max - 1;
+
+                return getMoyenne([notes[index_max], notes[index_min]]);
+            } else { // impair
+                const index = ( notes.length - 1 ) / 2;
+                return notes[index];
+            }
+        }
+
+
+
+        const notes1 = [0, 12, 10, 20, -12, 30];
+        const cleaned = getCleanedNotes(notes1);
+        console.log(notes1);
+        console.log( cleaned );
+        const moyenne1 = getMoyenne(cleaned);
+        console.log("Moyenne : " + moyenne1);
+
+        const classe = [
+            [9, 12, 13, 10, 7, 14],
+            [19, 2, 16, 10, 17, 14],
+            [18, 12, 13, 12, 7, 12],
+            [20, 12, 13, 0, 17, 14],
+        ];
+
+        console.log('---------------------')
+        const all_moyennes = [];
+        let max = 0;
+
+        classe.forEach( function (eleve, i)  {
+            const moyenne = getMoyenne(eleve);
+            const mediane = getMediane(eleve);
+            all_moyennes.push(moyenne);
+            console.info(`Eleve ${i} => moyenne : ${moyenne}, mediane : ${mediane}`);
+            if(moyenne > max) {
+                max = moyenne;
+            }
+        });
+
+        for(let m of all_moyennes) {
+            if(!max) {
+                max = m;
+            } else if (m > max){
+                max = m;
+            }
+        }
+
+        max = Math.max(...all_moyennes);
+        max = all_moyennes.reduce( (_max, note) => (_max > note)? _max : note);
+        max = all_moyennes.reduce( (_max, note) => Math.max(_max, note));
+
+        console.log('Moyenne la plus haute de la classe : ', max);
+        const moyenne_classe = getMoyenne(all_moyennes);
+        console.log("Moyenne de la classe : ", moyenne_classe);
+
+        const test = [ 12, 20, '15', 19, 0, 10, 'vingt'];
+        console.log('mediane : ' + getMediane(test))
+
+
+
+
+    </script>
+
+</body>
+</html>

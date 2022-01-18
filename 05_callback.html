@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    const classe = ['...', '...'];
+    // Fonctionnement ( simulé ) du forEach()
+
+    function myForeach(arr, callback) {
+        for(let i = 0; i < arr.length; i++) {
+            const current = arr[i];
+            // callback
+            callback(current, i);
+        }
+    }
+
+    function displayEleve(eleve, index) {
+        console.log(eleve, index)
+    }
+
+    myForeach(classe, displayEleve);
+
+    myForeach(classe, function (e, i) {
+        console.log(e, i)
+    });
+
+    myForeach(classe, (e, i) => console.log(e, i));
+
+
+    // for of
+    for(let eleve of classe) {
+        console.log(eleve);
+    }
+
+</script>
+
+</body>
+</html>
