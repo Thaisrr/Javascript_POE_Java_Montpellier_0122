@@ -34,14 +34,17 @@
 
         miauler() {
             console.log(`${this.nom} dit miaou`);
+            console.log(this)
         }
 
         dominerLeMonde = function () {
             console.log(`${this.nom} dominera le monde... mais pas maintenant, c'est l'heure de la sieste`);
+            console.log(this);
         }
 
         demanderDesCroquettes = () => {
             console.log(`${this.nom} veut des croquettes`)
+            console.log(this)
         }
 
         static afficherNbChat() {
@@ -130,6 +133,119 @@
 
     => existe en typescript ( sauf surcharge )
      */
+
+    /* Les objets littéraux ****/
+    class User {
+        nom;
+        age;
+        email;
+        sayHello() {
+            console.log('Hello');
+        }
+    }
+
+    console.warn('-------- Objets littéraux');
+    const user = {
+        nom: 'Jane Doe',
+        age: 30,
+        email: 'jdoe@mail.fr',
+        tools: ['truc', 'bidule', 'machin'],
+        best_friend : {nom: 'Truc'},
+        friends: [
+            {nom: 'Jean Miche'},
+            {nom: 'jklfds'},
+            {nom: 'fjdkslf'}
+        ],
+        sayHi1() {
+            console.log(this)
+        },
+        sayHi2: function () {
+            console.log(this)
+        },
+        sayHi3: () => console.log(this)
+    }
+    // JSON : Javascript Object Notation
+    // Ces objets ne sont pas des instances d'une classe
+    console.log('user instance of User : ', user instanceof User); // false
+    console.log('user instance of Object : ', user instanceof Object); // true
+
+    console.log(user.nom, user.age);
+    user.age = 45;
+    //user.sayHello(); //TypeError : user.sayHello() is not a function
+
+    console.log('function : ');
+    user.sayHi1();
+
+    console.log('fonction anonyme');
+    user.sayHi2();
+
+    console.log('fonction fléchée');
+    user.sayHi3();
+    /*
+    Dans un objet littéral, les fonctions fléchées n'ont pas le même contexte
+    que les fonctions classiques ou anonymes.
+    Classique et anonyme => this = objet dans lequel on est
+    Fléchées => Window ( fenêtre )
+     */
+
+    // On peut ajouter des propriétés dynamiquement
+    user.adress = '1 rue esquermoise, Lille';
+    console.log(user);
+
+    // Itérer dans un objet :
+    for (const key in user) {
+        console.log(key);
+        console.log( user[key] ); // récupérer une propriété depuis une string
+    }
+
+    //user.tools.forEach()
+    console.log(user.best_friend.nom);
+    user.friends.forEach(u => console.log(u.nom));
+
+    const nom = "Toto";
+
+   // const user2 = {nom: nom};
+    const user2 = {nom};
+    // Si la variable à le même nom que l'attribut, on peut passer la variable
+    // sans plus de précision.
+
+    // Sucre syntaxique :
+    // Syntaxes particulières servant à faciliter le code
+
+    //const email = user.email;
+    // const adress = user.adress;
+    const {email, adress, ...rest} = user;
+    console.log(email);
+    console.log(adress);
+    console.log(rest);
+    // user, sans les attributs récupérer avant : email et adress
+
+    const copy1 = user;
+    copy1.nom = 'Titi';
+    console.log(user.nom); // Titi
+
+    const {...copy} = user;
+    copy.nom = 'Titi';
+    console.log(user.nom); // Jane doe
+
+
+    // Apparté tableaux :
+
+
+    const fruits = ['Pommes', 'Poires', 'Abricots', 'Péches'];
+    //const apple = fruits[0];
+    //const pear = fruits[1];
+    const [apple, pear, ...end] = fruits;
+    console.log(apple); // pommes
+
+    const [...fruits_copy] = fruits;
+
+    function sum(...args) {
+        return args.reduce((s, el) => s + el);
+    }
+
+    sum(1, 4, 2);
+    sum(90, 78, 30, 29, 18);
 
 
 </script>
