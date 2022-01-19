@@ -11,8 +11,25 @@
 </head>
 <body>
 
-    <h1 style="color: black" id="titre">Hello DHTML ( Dynamic HTML )</h1>
+    <h1 onclick="console.log('click')" style="color: black" id="titre">Hello DHTML ( Dynamic HTML )</h1>
     <button onclick="changeColor()">Changer la couleur du titre</button>
+
+    <div>
+        <button onclick="showSecret()">Show Message</button>
+        <p id="secret" style="display: none">Message secret</p>
+    </div>
+    <p id="str">
+        Hello        <span>World     !</span>
+    </p>
+
+    <div id="container"></div>
+
+    <section id="fruits">
+        <h3>Mes fruits :</h3>
+        <ul></ul>
+    </section>
+
+
 
 <script>
     /* Document Objet Model  */
@@ -39,7 +56,7 @@
         if(h1.style.color === 'black') {
             h1.style.color = 'red';
         } else {
-            h1.style.color = 'black'
+            h1.style.color = 'black';
         }
     }
 // Pour éviter le bug du 1er clic ou éviter le style dans le html
@@ -49,6 +66,71 @@
         } else {
             h1.style.color = 'red'
         }
+    }
+
+    function showSecret() {
+        // querySelector : récupère n'importe quel selecteur CSS
+        const secret  = document.querySelector('#secret');
+        secret.style.display = (secret.style.display === 'none')? 'block' : 'none';
+        // => une des solutions pour faire un menu
+    }
+
+
+    // Text
+
+    const p = document.querySelector('#str');
+
+    console.log( p.textContent ); // le text dans la balise
+    console.log( p.innerText ); // le text tel qu'affiché dans le HTML
+    console.log( p.innerHTML ); // Afficher le CSS de la balise
+
+    p.textContent = "Bonjour <b>le monde</b>";
+    p.innerText = "Holà ! <b>Como estas ?</b>";
+    p.innerHTML = `Konichiwa <b onclick="alert('Mouahahah')" >World</b>`;
+    // InnerHTML = DANGER !!!!!!!!!!!!!!!!!!
+
+    /*
+    innerText => fonctionnalité non standardisée
+    textContent => standardisé
+
+    => privilégier le textContent
+     */
+
+
+    // Create element :
+    const new_p = document.createElement('p');// n'importe quel nom de balise
+    new_p.textContent = "Un p créé en JS !";
+
+    new_p.id = 'jsp';
+    new_p.title = "Affiché au survol !";
+    new_p.ariaHidden = "false";
+    new_p.setAttribute('data-test', 'test');
+
+    new_p.className = 'ma-classe'; // class="ma-class"
+    new_p.classList.add('blue');
+    new_p.classList.remove('ma-classe');
+    new_p.classList.replace('blue', 'green');
+
+    const b = document.createElement('b');
+    b.textContent = ' Et un b !';
+    new_p.appendChild(b);
+
+
+    const parent = document.querySelector('#container');
+    parent.appendChild(new_p);
+    // Ajoute à la fin du parent
+
+
+    // Pour une liste d'éléments
+    const fruits = ['Pommes', 'Poires', 'Bananes'];
+
+    const ul = document.querySelector('#fruits > ul');
+
+    for (let f of fruits) {
+        const li = document.createElement('li');
+        li.textContent = f;
+        //... classes, et autres propriétés
+        ul.appendChild(li);
     }
 
 </script>
