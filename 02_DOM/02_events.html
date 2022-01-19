@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Evenements</title>
+    <style>
+        div {
+            padding: 40px;
+            border: solid red;
+            background: pink;
+        }
+        p {
+            padding: 40px;
+            border: solid blue;
+            background: aqua;
+        }
+
+        #char {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+
+<div onmouseenter="console.log('mouse enter')"
+     onmouseleave="console.log('mouse leave')"
+     ondblclick="console.log('double click')"
+     onclick="sayHi('div')"
+>
+    Div
+    <p onclick="sayHi('p')">
+        Paragraph
+        <button id="btn_hi">Hi</button>
+    </p>
+</div>
+
+<button>Coucou</button>
+<button>Hello</button>
+<button>Don't click here !</button>
+
+<div id="char"></div>
+
+<script src="js/events.js"></script>
+</body>
+</html>
