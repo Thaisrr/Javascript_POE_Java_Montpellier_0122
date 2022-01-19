@@ -52,6 +52,19 @@ function displayBooks2() {
 function displayBooksCards() {
     const deck = document.querySelector('#deck');
     for (let b of obj_books) {
+        /*
+        Pour créer des éléments complexes :
+        -> visualiser la hiérarchie de l'élément
+        -> Create element : ( conseille ) :
+            créer le parent en premier,
+                puis le 1er enfant, ses propres enfants
+                puis le 2eme, ses propres,
+         -> append Child :
+            -> commencer par le plus petit enfant, et remonter progressivement
+            la hiérarchie pour n'oublier
+
+            => chaque élément créer doit être appendChild quelque part
+         */
         const card = document.createElement('div');
         card.classList.add('card');
 
