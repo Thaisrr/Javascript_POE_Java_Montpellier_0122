@@ -9,8 +9,35 @@
             color: #722736;
         }
 
-        .default.read {
+        .default.read, .card .read {
             color: teal;
+        }
+
+        .deck {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 1px 2px 8px rgba(128, 128, 128, 0.58);
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+        }
+
+        .card-body {
+            padding: 20px;
         }
 
     </style>
@@ -21,5 +48,12 @@
 <ul id="ul_book"></ul>
 
 <ul id="ul_book2"></ul>
+
+<div id="deck" class="deck">
+</div>
+
+
+
+
 </body>
 </html>
