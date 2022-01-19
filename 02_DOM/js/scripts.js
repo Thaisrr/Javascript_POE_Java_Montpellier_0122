@@ -1,3 +1,8 @@
+/**
+ * Return query selector
+ * @param selector : string
+ * @returns {HTMLElement}
+ */
 function $(selector) {
     return document.querySelector(selector);
 }
