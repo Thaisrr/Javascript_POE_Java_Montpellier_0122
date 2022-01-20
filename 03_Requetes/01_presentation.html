@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+
+<h2>Users : </h2>
+<ul id="ul"></ul>
+
+<script>
+
+    const url = "https://jsonplaceholder.typicode.com/users";
+    let users = [];
+
+    function displayUsers() {
+        const ul = document.querySelector('#ul')
+        users.forEach(u => {
+            const li = document.createElement('li');
+            li.textContent = u.name;
+            ul.appendChild(li);
+        })
+    }
+
+    console.log(1);
+    function getUsers() {
+        axios.get(url)
+            .then(res => {
+                users = res.data;
+                console.log(2);
+                displayUsers();
+            })
+            .catch(err => {
+                alert('Erreur inconnue : ' +  err.message)
+            })
+    }
+
+    function createUser() {
+        const new_user = {name: 'Jean Doe', username: 'fdsfds'};
+        axios.post(url, new_user)
+            .then(res => {
+                alert('Created !')
+                console.log(res);
+            })
+            .catch(err => alert(err.message))
+    }
+
+
+
+    console.log(3)
+    getUsers();
+    createUser();
+
+
+</script>
+
+</body>
+</html>
